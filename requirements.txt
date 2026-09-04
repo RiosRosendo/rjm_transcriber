@@ -1,0 +1,3 @@
+PyAudioWPatch
+faster-whisper
+requests
