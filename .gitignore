@@ -1,0 +1,19 @@
+# Entorno virtual
+venv/
+__pycache__/
+*.pyc
+
+# Datos generados (audio de juntas, transcripts, recaps)
+# Estos pueden contener informacion sensible/confidencial de juntas reales,
+# no deberian subirse a un repo publico ni privado sin pensarlo.
+recordings/
+transcripts/
+recaps/
+
+# Modelos descargados en cache
+*.pt
+*.bin
+.cache/
+
+# Configuracion local
+.env
