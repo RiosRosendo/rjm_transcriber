@@ -11,6 +11,7 @@
     background-color: #fafafa;
     color: #222;
   }
+  .logo { max-width: 160px; max-height: 80px; margin-bottom: 12px; }
   h2 { margin-bottom: 4px; }
   .subtitle { color: #777; font-size: 13px; margin-bottom: 24px; }
   button {
@@ -43,6 +44,7 @@
 </style>
 </head>
 <body>
+  <img src="logo.jpg" alt="Logo" class="logo" onerror="this.style.display='none'">
   <h2>Asistente de Juntas</h2>
   <div class="subtitle">Todo corre local en tu computadora</div>
   <button id="recordBtn" onclick="toggleRecording()">Grabar junta</button>
