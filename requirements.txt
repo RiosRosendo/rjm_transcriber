@@ -2,3 +2,4 @@ PyAudioWPatch
 faster-whisper
 requests
 pywebview
+pydub
