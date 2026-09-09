@@ -18,7 +18,9 @@ OUTPUT_DIR = "recaps"
 
 PROMPT_TEMPLATE = """Eres un asistente que resume juntas de trabajo. A continuacion
 esta la transcripcion de una reunion (puede tener errores de transcripcion, ignoralos
-si no afectan el sentido). Genera un recap en espanol con este formato exacto:
+si no afectan el sentido). La transcripcion puede tener partes en ingles y partes en
+espanol, marcadas con [EN] o [ES] cuando cambia el idioma de quien habla. Sin importar
+el idioma original, genera el recap COMPLETO en espanol, con este formato exacto:
 
 ## Resumen general
 (2-3 lineas)
@@ -48,7 +50,16 @@ def summarize(transcript_path):
     print("Generando recap con el modelo local (Ollama)...")
     response = requests.post(
         OLLAMA_URL,
-        json={"model": MODEL, "prompt": prompt, "stream": False},
+        json={
+            "model": MODEL,
+            "prompt": prompt,
+            "stream": False,
+            # num_ctx sube la ventana de contexto del modelo. Por defecto
+            # Ollama suele usar 2048-4096 tokens, que se queda corto para
+            # una transcripcion de 20-30 minutos (~4,500-6,000 tokens).
+            # 16384 deja margen comodo incluso para juntas un poco mas largas.
+            "options": {"num_ctx": 16384},
+        },
         timeout=600,
     )
     response.raise_for_status()
